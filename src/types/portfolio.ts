@@ -6,39 +6,46 @@ export interface NavLink {
 export interface SocialLink {
   label: string;
   href: string;
-  icon: "github" | "linkedin" | "twitter" | "mail" | "instagram";
+  icon: "github" | "linkedin" | "devto" | "mail";
 }
 
 export interface SkillGroup {
-  category: string;
+  label: string;
   items: string[];
 }
 
 export interface Project {
-  slug: string;
+  index: string;
   title: string;
   description: string;
-  tags: string[];
-  image: string;
-  liveUrl?: string;
-  repoUrl?: string;
-  featured?: boolean;
+  tech: string;
+  link: string;
 }
 
 export interface ExperienceItem {
   role: string;
-  organization: string;
-  period: string;
-  description: string;
+  company: string;
+  link: string;
+  dates: string;
+  summary: string;
+}
+
+export interface Stat {
+  value: string;
+  label: string;
 }
 
 export interface SiteProfile {
   name: string;
+  brand: string;
   role: string;
-  tagline: string;
   location: string;
+  timezone: string;
   email: string;
-  bio: string[];
-  resumeUrl?: string;
-  avatar: string;
+  heroName: [string, string];
+  heroBio: string;
+  aboutBio: string;
+  stats: Stat[];
+  contactHeading: string;
+  contactBio: string;
 }

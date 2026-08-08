@@ -1,31 +1,66 @@
+"use client";
+
+import { useState } from "react";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Blueprint } from "@/components/ui/Blueprint";
 import { experience } from "@/data/portfolio";
 
 export function Experience() {
-  return (
-    <section id="experience" className="border-b border-border py-20 sm:py-24">
-      <Container className="flex flex-col gap-12">
-        <SectionHeading eyebrow="Experience" title="Where I've worked" />
+  const [hovered, setHovered] = useState<number | null>(null);
 
-        <ol className="flex flex-col gap-8 border-l border-border pl-6 sm:gap-10 sm:pl-8">
-          {experience.map((item) => (
-            <li key={`${item.organization}-${item.period}`} className="relative">
-              <span className="absolute -left-[29px] top-1.5 size-3 rounded-full border-2 border-background bg-accent sm:-left-[37px]" />
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                <h3 className="text-base font-semibold text-foreground sm:text-lg">
-                  {item.role} · <span className="text-muted">{item.organization}</span>
-                </h3>
-                <span className="text-xs font-medium uppercase tracking-wide text-muted">
-                  {item.period}
-                </span>
-              </div>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-                {item.description}
-              </p>
-            </li>
-          ))}
-        </ol>
+  return (
+    <section id="experience" className="py-12 sm:py-16">
+      <Container>
+        <SectionLabel number="05" label="Experience" />
+
+        <div className="grid gap-4">
+          {experience.map((job, index) => {
+            const active = hovered === index;
+
+            return (
+              <Blueprint
+                key={`${job.company}-${job.dates}`}
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
+                cornerClassName={active ? "text-background" : "text-foreground/55"}
+                className={`cursor-pointer border p-6 transition-all duration-250 ease-out sm:p-6 ${
+                  active
+                    ? "scale-[1.015] border-foreground bg-foreground text-background shadow-xl sm:p-7"
+                    : "border-foreground/22 bg-transparent text-foreground"
+                }`}
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <div>
+                    <h3
+                      className={`font-display font-extrabold tracking-tight transition-[font-size] duration-250 ${
+                        active ? "text-[22px]" : "text-xl"
+                      }`}
+                    >
+                      {job.role}
+                    </h3>
+                    <a
+                      href={job.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-semibold"
+                    >
+                      {job.company}
+                    </a>
+                  </div>
+                  <span
+                    className={`px-2.5 py-0.5 text-[11px] tracking-wide ${
+                      active ? "bg-background text-foreground" : "bg-foreground/10 text-foreground/80"
+                    }`}
+                  >
+                    {job.dates}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm opacity-85">{job.summary}</p>
+              </Blueprint>
+            );
+          })}
+        </div>
       </Container>
     </section>
   );

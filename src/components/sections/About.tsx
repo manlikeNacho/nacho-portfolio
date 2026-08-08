@@ -1,51 +1,39 @@
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Blueprint } from "@/components/ui/Blueprint";
 import { profile } from "@/data/portfolio";
 
 export function About() {
   return (
-    <section id="about" className="border-b border-border py-20 sm:py-24">
-      <Container className="flex flex-col gap-10 lg:flex-row lg:gap-16">
-        <div className="lg:w-1/3">
-          <SectionHeading eyebrow="About" title="A bit about me" />
-        </div>
+    <section id="about" className="py-12 sm:py-16">
+      <Container>
+        <SectionLabel number="02" label="About" />
 
-        <div className="flex flex-col gap-5 lg:w-2/3">
-          {profile.bio.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="text-sm leading-relaxed text-muted sm:text-base"
-            >
-              {paragraph}
-            </p>
-          ))}
+        <div className="grid grid-cols-1 items-start gap-8 sm:grid-cols-12 sm:gap-[clamp(24px,5vw,64px)]">
+          <p className="text-lg leading-relaxed sm:col-span-7">
+            {profile.aboutBio}
+          </p>
 
-          <dl className="mt-4 grid grid-cols-2 gap-6 border-t border-border pt-6 sm:grid-cols-3">
-            <div>
-              <dt className="text-xs uppercase tracking-wide text-muted">
-                Location
-              </dt>
-              <dd className="mt-1 text-sm font-medium text-foreground">
-                {profile.location}
-              </dd>
+          <Blueprint
+            className="border border-foreground/22 p-6 sm:col-span-5"
+            cornerClassName="text-foreground/55"
+          >
+            <span className="block text-[10px] font-semibold uppercase tracking-[0.1em] text-accent">
+              At a glance
+            </span>
+            <div className="mt-3 grid gap-3">
+              {profile.stats.map((stat) => (
+                <div key={stat.label}>
+                  <span className="block font-heading text-[28px] font-semibold leading-none">
+                    {stat.value}
+                  </span>
+                  <span className="block text-sm text-foreground/70">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
             </div>
-            <div>
-              <dt className="text-xs uppercase tracking-wide text-muted">
-                Role
-              </dt>
-              <dd className="mt-1 text-sm font-medium text-foreground">
-                {profile.role}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-xs uppercase tracking-wide text-muted">
-                Email
-              </dt>
-              <dd className="mt-1 truncate text-sm font-medium text-foreground">
-                {profile.email}
-              </dd>
-            </div>
-          </dl>
+          </Blueprint>
         </div>
       </Container>
     </section>

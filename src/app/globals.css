@@ -1,54 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08090d;
-  --surface: #0f1117;
-  --surface-elevated: #141722;
-  --border: #1f2330;
-  --foreground: #f4f5f7;
-  --muted: #9aa0ae;
-  --accent: #7c5cff;
-  --accent-secondary: #22d3ee;
+  --background: #2b2b2d;
+  --foreground: #f2f2f3;
+  --accent: #5980a6;
+  --accent-2: #728fab;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-elevated: var(--surface-elevated);
-  --color-border: var(--border);
   --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
   --color-accent: var(--accent);
-  --color-accent-secondary: var(--accent-secondary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent-2: var(--accent-2);
+  --font-heading: var(--font-barlow-condensed);
+  --font-body: var(--font-barlow);
+  --font-display: var(--font-inter);
 }
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body), system-ui, sans-serif;
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        rgba(242, 242, 243, 0.08) 0 1px,
+        transparent 1px 48px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(242, 242, 243, 0.08) 0 1px,
+        transparent 1px 48px
+      );
+    background-position: center top;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+
+  a {
+    color: var(--foreground);
+    text-underline-offset: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--foreground) 25%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-}
-
-::selection {
-  background: var(--accent);
-  color: #fff;
-}
-
-.text-gradient {
-  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.bg-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+.cursor-hidden,
+.cursor-hidden * {
+  cursor: none !important;
 }
