@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { navLinks, profile } from "@/data/portfolio";
 
 export function Header() {
@@ -12,11 +14,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-foreground/15 bg-background/90 backdrop-blur-sm">
       <Container className="flex h-16 items-center justify-between sm:h-[68px]">
-        <a
-          href="#top"
-          className="font-heading text-lg font-semibold tracking-tight text-foreground"
-        >
-          {profile.brand}
+        <a href="#top" aria-label={profile.name}>
+          <Logo />
         </a>
 
         <nav className="hidden items-center gap-6 sm:flex">
@@ -31,19 +30,23 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden sm:block">
+        <div className="hidden items-center gap-3 sm:flex">
+          <ThemeToggle />
           <Button href={`mailto:${profile.email}`}>Email me</Button>
         </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((prev) => !prev)}
-          className="inline-flex size-10 items-center justify-center border border-foreground/25 text-foreground sm:hidden"
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+        <div className="flex items-center gap-3 sm:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((prev) => !prev)}
+            className="inline-flex size-10 items-center justify-center border border-foreground/25 text-foreground"
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </Container>
 
       {open ? (

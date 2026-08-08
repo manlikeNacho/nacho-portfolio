@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
-import { Barlow, Barlow_Condensed, Inter } from "next/font/google";
+import localFont from "next/font/local";
+import Script from "next/script";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
-const barlow = Barlow({
-  variable: "--font-barlow",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
+const originDisplay = localFont({
+  variable: "--font-origin-display",
+  src: [
+    { path: "../Origin/Web-TT/Origin-RegularDisplay.woff2", weight: "400" },
+    { path: "../Origin/Web-TT/Origin-SemiBoldDisplay.woff2", weight: "600" },
+    { path: "../Origin/Web-TT/Origin-ExtraBoldDisplay.woff2", weight: "800" },
+    { path: "../Origin/Web-TT/Origin-BlackDisplay.woff2", weight: "900" },
+  ],
 });
 
-const barlowCondensed = Barlow_Condensed({
-  variable: "--font-barlow-condensed",
-  subsets: ["latin"],
-  weight: ["400", "600"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["800", "900"],
+const originText = localFont({
+  variable: "--font-origin-text",
+  src: [
+    { path: "../Origin/Web-TT/Origin-RegularText.woff2", weight: "400" },
+    { path: "../Origin/Web-TT/Origin-MediumText.woff2", weight: "500" },
+    { path: "../Origin/Web-TT/Origin-BoldText.woff2", weight: "700" },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -31,9 +33,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${barlow.variable} ${barlowCondensed.variable} ${inter.variable} h-full antialiased`}
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${originDisplay.variable} ${originText.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`,
+          }}
+        />
         <CustomCursor />
         {children}
       </body>

@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Origin font: only the 7 static woff2 weights actually loaded in layout.tsx
+# are needed. Ignore the rest of the vendor drop (other formats, unused
+# weights, EULA, .DS_Store) but keep the directory tree visible to git so
+# the un-ignores below can reach into it.
+src/Origin/*
+!src/Origin/Web-TT/
+src/Origin/Web-TT/*
+!src/Origin/Web-TT/Origin-RegularDisplay.woff2
+!src/Origin/Web-TT/Origin-SemiBoldDisplay.woff2
+!src/Origin/Web-TT/Origin-ExtraBoldDisplay.woff2
+!src/Origin/Web-TT/Origin-BlackDisplay.woff2
+!src/Origin/Web-TT/Origin-RegularText.woff2
+!src/Origin/Web-TT/Origin-MediumText.woff2
+!src/Origin/Web-TT/Origin-BoldText.woff2
