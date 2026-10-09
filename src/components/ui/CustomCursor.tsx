@@ -16,13 +16,17 @@ function getServerSnapshot() {
   return false;
 }
 
-const BASE_SIZE = 32;
+const BASE_SIZE = 48;
 const HOVER_SIZE = 72;
 // Lower = smoother/laggier trail, higher = snappier. Applied per animation frame.
 const EASE = 0.2;
 
 export function CustomCursor() {
-  const enabled = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const enabled = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
   const dotRef = useRef<HTMLDivElement>(null);
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
@@ -82,7 +86,7 @@ export function CustomCursor() {
     <div
       ref={dotRef}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full bg-foreground mix-blend-difference"
+      className="pointer-events-none fixed left-0 top-0 z-9999 rounded-full bg-foreground mix-blend-difference"
       style={{ width: BASE_SIZE, height: BASE_SIZE }}
     />
   );

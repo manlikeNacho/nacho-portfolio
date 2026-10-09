@@ -15,7 +15,7 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ className = "" }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<"light" | "dark">(readTheme);
+  const [theme, setTheme] = useState("dark"); // Only dark theme for now
 
   useLayoutEffect(() => {
     // Re-applies the attribute after React's dev Strict Mode remount clears it; a no-op in production.
@@ -32,7 +32,9 @@ export function ThemeToggle({ className = "" }: ThemeToggleProps) {
     <button
       type="button"
       onClick={toggle}
-      aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={
+        theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+      }
       suppressHydrationWarning
       className={`inline-flex size-10 items-center justify-center border border-foreground/25 text-foreground transition-colors hover:bg-foreground/5 ${className}`}
     >

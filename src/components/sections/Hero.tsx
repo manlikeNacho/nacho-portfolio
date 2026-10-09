@@ -12,15 +12,15 @@ export function Hero() {
     >
       <Parallax strength={60}>
         <Container>
-          <div className="mb-8 flex flex-wrap items-center justify-between gap-3 sm:mb-16">
+          {/* <div className="mb-8 flex flex-wrap items-center justify-between gap-3 sm:mb-16">
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-foreground/75">
               <span className="size-[7px] rounded-full bg-foreground" />
               Available for new projects
             </span>
             <LocalClock timeZone={profile.timezone} location={profile.location} />
-          </div>
+          </div> */}
 
-          <span className="mb-4 block font-heading text-sm font-semibold uppercase tracking-[0.1em] text-foreground/60">
+          <span className="mb-4 block font-heading text-sm font-semibold uppercase tracking-widest text-foreground/60">
             {profile.role}
           </span>
 
