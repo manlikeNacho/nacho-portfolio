@@ -22,7 +22,7 @@ export const profile: SiteProfile = {
   stats: [
     { value: "4+ yrs", label: "professional backend/fullstack" },
     { value: "6", label: "engineers led at JéGO" },
-    { value: "1,900+", label: "automated tests in the JéGO backend" },
+    { value: "5+", label: "B2B fleet partners on the platform I built" },
   ],
   contactHeading: "Let's build something that holds.",
   contactBio:
